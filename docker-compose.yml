@@ -1,16 +1,6 @@
 version: '3'
 
 services:
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: MasterUuid
-    restart: always
-    ports:
-      - "8090:80"  # Verbindt de poort 8080 van de host met poort 80 van de container
-    environment:
-      PMA_HOST: mysql_masteruuid  # De naam van de MySQL-server (standaard 'mysql' voor Docker)
-      PMA_PORT: 50001   # De poort van de MySQL-server
-
   mysql:
     image: mysql:5.7
     container_name: mysql_MasterUuid
@@ -22,6 +12,17 @@ services:
       MYSQL_ROOT_PASSWORD: mypassword
     volumes:
       - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: MasterUuid
+    restart: always
+    ports:
+      - "8090:80"  # Verbindt de poort 8080 van de host met poort 80 van de container
+    environment:
+      PMA_HOST: mysql_masteruuid  # De naam van de MySQL-server (standaard 'mysql' voor Docker)
+      PMA_PORT: 50001   # De poort van de MySQL-server
+      PMA_ARBITRARY: 1
 
   flask_app:
     build: 
