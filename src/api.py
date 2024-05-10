@@ -8,7 +8,7 @@ def create_connection():
     """ Make database connection """
     try:
         connection = mysql.connector.connect(
-            host='mysql',
+            host='mysql_masteruuid',
             port=3306,
             user='root',
             password='mypassword',

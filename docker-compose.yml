@@ -18,7 +18,8 @@ services:
     ports:
       - "50001:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: mypassword 
+      PMA_HOST: mysql_masteruuid
+      MYSQL_ROOT_PASSWORD: mypassword
     volumes:
       - mysql_data:/var/lib/mysql
 
