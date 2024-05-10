@@ -8,5 +8,7 @@ RUN pip install --no-cache-dir --force-reinstall Flask==3.0.3 mysql-connector-py
 # Copy the application code into the container
 COPY . .
 
+RUN chmod +x src/start.sh
+
 # Set the command to run the Flask application
-CMD ["python", "src/api.py"]
+CMD ["src/start.sh"]
