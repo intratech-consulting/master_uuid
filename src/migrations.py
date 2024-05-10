@@ -48,13 +48,13 @@ def create_master_uuid_table():
     query = """
     CREATE TABLE IF NOT EXISTS masterUuid (
         id VARCHAR(36) PRIMARY KEY,
-        fossbilling VARCHAR(255),
-        salesforce VARCHAR(255),
-        google_calendar VARCHAR(255),
-        wordpress VARCHAR(255),
-        odoo VARCHAR(255),
-        sendgrid VARCHAR(255),
-        inventree VARCHAR(255)
+        facturatie VARCHAR(255),
+        crm VARCHAR(255),
+        planning VARCHAR(255),
+        frontend VARCHAR(255),
+        kassa VARCHAR(255),
+        mailing VARCHAR(255),
+        inventory VARCHAR(255)
     );
     """
     try:
