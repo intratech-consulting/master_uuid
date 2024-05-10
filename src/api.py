@@ -25,7 +25,8 @@ def create_connection():
         return error_message  # Return the error message
 
 
-def insert_master_uuid(id, fossbilling=None, salesforce=None, google_calendar=None, wordpress=None, odoo=None, sendgrid=None, inventree=None):
+def insert_master_uuid(id, facturatie=None, crm=None, planning=None, frontend=None, kassa=None,
+                       mailing=None, inventory=None):
     """ Add a new row to the masterUuid table """
     connection = create_connection()
     if isinstance(connection, str):  # connection error, returning as an error message
@@ -33,12 +34,12 @@ def insert_master_uuid(id, fossbilling=None, salesforce=None, google_calendar=No
 
     cursor = connection.cursor()
     query = """
-    INSERT INTO masterUuid (id, fossbilling, salesforce, google_calendar, wordpress, odoo, sendgrid, inventree)
+    INSERT INTO masterUuid (id, facturatie, crm, planning, frontend, kassa, mailing, inventory)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
     """
 
     try:
-        cursor.execute(query, (id, fossbilling, salesforce, google_calendar, wordpress, odoo, sendgrid, inventree))
+        cursor.execute(query, (id, facturatie, crm, planning, frontend, kassa, mailing, inventory))
         connection.commit()
         print("Data successfully added.")
         return True, {"success": True, "MasterUuid": id, "message": "Data successfully added."}, 201
@@ -76,7 +77,7 @@ def add_service_id():
     data = request.get_json()
     master_uuid = data.get("MasterUuid")
     service_id = data.get("ServiceId")
-    service_name = data.get("ServiceName")
+    service_name = data.get("Service")
 
     # Connect to the database and attempt to update the record
     connection = create_connection()
