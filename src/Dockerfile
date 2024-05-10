@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir --force-reinstall Flask==3.0.3 mysql-connector-py
 COPY . .
 
 # Set the command to run the Flask application
-CMD ["python", "api.py"]
+CMD ["python", "src/api.py"]
