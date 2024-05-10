@@ -1,3 +1,4 @@
+import uuid
 from flask import Flask, request, jsonify
 import mysql.connector
 from mysql.connector import Error
@@ -26,14 +27,16 @@ def insert_master_uuid(fossbilling, salesforce, google_calendar, wordpress, odoo
     connection = create_connection()
     if isinstance(connection, str):  # Check if connection is an error message
         return jsonify({"error": connection}), 500  # Return error as JSON response
-    
+
     cursor = connection.cursor()
     query = """
-    INSERT INTO masterUuid (fossbilling, salesforce, google_calendar, wordpress, odoo, sendgrid, inventree)
-    VALUES (%s, %s, %s, %s, %s, %s, %s);
+    INSERT INTO masterUuid (id, fossbilling, salesforce, google_calendar, wordpress, odoo, sendgrid, inventree)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
     """
+    # Generate a UUID
+    id = str(uuid.uuid4())
     try:
-        cursor.execute(query, (fossbilling, salesforce, google_calendar, wordpress, odoo, sendgrid, inventree))
+        cursor.execute(query, (id, fossbilling, salesforce, google_calendar, wordpress, odoo, sendgrid, inventree))
         connection.commit()
         print("Data successfully added.")
         return jsonify({"success": True, "message": "Data successfully added."}), 201
