@@ -25,8 +25,7 @@ def create_connection():
         return error_message  # Return the error message
 
 
-def insert_master_uuid(id, fossbilling=None, salesforce=None, google_calendar=None, wordpress=None, odoo=None,
-                       sendgrid=None, inventree=None):
+def insert_master_uuid(id, fossbilling=None, salesforce=None, google_calendar=None, wordpress=None, odoo=None, sendgrid=None, inventree=None):
     """ Add a new row to the masterUuid table """
     connection = create_connection()
     if isinstance(connection, str):  # connection error, returning as an error message
@@ -42,7 +41,7 @@ def insert_master_uuid(id, fossbilling=None, salesforce=None, google_calendar=No
         cursor.execute(query, (id, fossbilling, salesforce, google_calendar, wordpress, odoo, sendgrid, inventree))
         connection.commit()
         print("Data successfully added.")
-        return True, {"MasterUuid": id, "success": True, "message": "Data successfully added."}, 201
+        return True, {"success": True, "MasterUuid": id, "message": "Data successfully added."}, 201
     except Error as e:
         error_message = f"Failed to insert data: {e}"
         print(error_message)
@@ -103,8 +102,6 @@ def add_service_id():
     finally:
         cursor.close()
         connection.close()
-
-
 
 @app.route('/getMasterUuid', methods=['POST'])
 def get_master_uuid():
