@@ -165,5 +165,4 @@ def update_service_id():
         connection.close()
 
 if __name__ == '__main__':
-    create_master_uuid_table()
     app.run(host='0.0.0.0', port=6000, debug=True)
