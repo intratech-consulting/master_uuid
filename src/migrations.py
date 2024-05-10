@@ -47,7 +47,7 @@ def create_master_uuid_table():
     cursor = connection.cursor()
     query = """
     CREATE TABLE IF NOT EXISTS masterUuid (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id VARCHAR(36) PRIMARY KEY,
         fossbilling VARCHAR(255),
         salesforce VARCHAR(255),
         google_calendar VARCHAR(255),
