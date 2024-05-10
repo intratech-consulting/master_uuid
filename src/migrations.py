@@ -47,14 +47,14 @@ def create_master_uuid_table():
     cursor = connection.cursor()
     query = """
     CREATE TABLE IF NOT EXISTS masterUuid (
-        id VARCHAR(36) PRIMARY KEY,
-        facturatie VARCHAR(255),
-        crm VARCHAR(255),
-        planning VARCHAR(255),
-        frontend VARCHAR(255),
-        kassa VARCHAR(255),
-        mailing VARCHAR(255),
-        inventory VARCHAR(255)
+        id VARCHAR(36) PRIMARY KEY NOT NULL,
+        facturatie VARCHAR(255) UNIQUE ,
+        crm VARCHAR(255)UNIQUE ,
+        planning VARCHAR(255) UNIQUE,
+        frontend VARCHAR(255) UNIQUE,
+        kassa VARCHAR(255) UNIQUE,
+        mailing VARCHAR(255) UNIQUE,
+        inventory VARCHAR(255) UNIQUE
     );
     """
     try:
