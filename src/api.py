@@ -9,9 +9,9 @@ def create_connection():
     try:
         connection = mysql.connector.connect(
             host='mysql',
-            port=50001,
+            port=3306,
             user='root',
-            password='Mypassword',
+            password='mypassword',
             database='masterUuid'
         )
         print("Connected successfully to the database.")
