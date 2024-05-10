@@ -134,6 +134,38 @@ def get_master_uuid():
         cursor.close()
         connection.close()
 
+
+@app.route('/getServiceId', methods=['POST'])
+def get_service_id():
+    """ API endpoint for getting a service ID """
+    data = request.get_json()
+    master_uuid = data.get('MASTERUUID')
+    service_name = data.get('Service')
+
+    connection = create_connection()
+    if isinstance(connection, str):  # Check if connection is an error message
+        return jsonify({"error": connection}), 500  # Return error as JSON response
+
+    cursor = connection.cursor()
+    query = """
+    SELECT {} FROM masterUuid WHERE id = %s;
+    """.format(service_name)
+    try:
+        cursor.execute(query, (master_uuid,))
+        result = cursor.fetchone()
+        if result:
+            return jsonify({service_name: result[0]}), 200
+        else:
+            return jsonify({"error": "No matching entry found."}), 404
+    except Error as e:
+        error_message = f"Failed to fetch data: {e}"
+        print(error_message)
+        return jsonify({"error": error_message}), 500  # Return error as JSON response
+    finally:
+        cursor.close()
+        connection.close()
+
+
 @app.route('/UpdateServiceId', methods=['POST'])
 def update_service_id():
     """ API endpoint for updating a service ID """
