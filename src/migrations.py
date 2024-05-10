@@ -4,6 +4,24 @@ from mysql.connector import Error
 def create_connection():
     """ Make database connection """
     try:
+        # Connect to MySQL server without specifying a database
+        connection = mysql.connector.connect(
+            host='mysql_masteruuid',
+            port=3306,
+            user='root',
+            password='mypassword'
+        )
+        cursor = connection.cursor()
+
+        # Check if the 'masterUuid' database exists and create it if it doesn't
+        cursor.execute("CREATE DATABASE IF NOT EXISTS masterUuid")
+        connection.commit()
+
+        # Close the connection and cursor
+        cursor.close()
+        connection.close()
+
+        # Connect to the 'masterUuid' database
         connection = mysql.connector.connect(
             host='mysql_masteruuid',
             port=3306,
@@ -17,6 +35,8 @@ def create_connection():
         error_message = f"DB-connection Error: '{e}'"
         print(error_message)
         return error_message  # Return the error message
+
+
 
 def create_master_uuid_table():
     """ Create masterUuid table if it doesn't exist """
