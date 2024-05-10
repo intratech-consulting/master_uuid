@@ -91,7 +91,8 @@ def get_master_uuid():
 def update_service_id():
     """ API endpoint for updating a service ID """
     data = request.get_json()
-    service_id = data.get('ServiceId')
+    master_uuid = data.get('MASTERUUID')
+    new_service_id = data.get('NewServiceId')
     service_name = data.get('Service')
 
     connection = create_connection()
@@ -100,10 +101,10 @@ def update_service_id():
 
     cursor = connection.cursor()
     query = """
-    UPDATE masterUuid SET {} = %s WHERE id = (SELECT id FROM masterUuid WHERE {} = %s);
-    """.format(service_name, service_name)
+    UPDATE masterUuid SET {} = %s WHERE id = %s;
+    """.format(service_name)
     try:
-        cursor.execute(query, (service_id, service_id))
+        cursor.execute(query, (new_service_id, master_uuid))
         connection.commit()
         if cursor.rowcount:
             return jsonify({"success": True, "message": "Data successfully updated."}), 200
