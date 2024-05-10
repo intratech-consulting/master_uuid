@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
+
 def create_connection():
     """ Make database connection """
     try:
@@ -37,7 +38,6 @@ def create_connection():
         return error_message  # Return the error message
 
 
-
 def create_master_uuid_table():
     """ Create masterUuid table if it doesn't exist """
     connection = create_connection()
@@ -69,6 +69,7 @@ def create_master_uuid_table():
     finally:
         cursor.close()
         connection.close()
+
 
 if __name__ == '__main__':
     create_master_uuid_table()
