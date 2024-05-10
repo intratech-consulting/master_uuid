@@ -48,8 +48,8 @@ def create_master_uuid_table():
     query = """
     CREATE TABLE IF NOT EXISTS masterUuid (
         id VARCHAR(36) PRIMARY KEY NOT NULL,
-        facturatie VARCHAR(255) UNIQUE ,
-        crm VARCHAR(255)UNIQUE ,
+        facturatie VARCHAR(255) UNIQUE,
+        crm VARCHAR(255) UNIQUE,
         planning VARCHAR(255) UNIQUE,
         frontend VARCHAR(255) UNIQUE,
         kassa VARCHAR(255) UNIQUE,
