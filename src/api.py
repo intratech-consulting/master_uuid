@@ -166,7 +166,7 @@ def get_service_id():
         connection.close()
 
 
-@app.route('/UpdateServiceId', methods=['POST'])
+@app.route('/updateServiceId', methods=['POST'])
 def update_service_id():
     """ API endpoint for updating a service ID """
     data = request.get_json()
