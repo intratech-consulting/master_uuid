@@ -123,7 +123,7 @@ def get_master_uuid():
         cursor.execute(query, (service_id,))
         result = cursor.fetchone()
         if result:
-            return jsonify({"MASTERUUID": result[0]}), 200
+            return jsonify({"UUID": result[0]}), 200
         else:
             return jsonify({"error": "No matching entry found."}), 404
     except Error as e:
